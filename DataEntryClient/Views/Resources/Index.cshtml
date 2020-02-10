@@ -8,6 +8,14 @@
 
 @if (ViewBag.LoggedIn == true)
 {
+    <form asp-controller="Clients" asp-action="Index">
+        <p>
+            Position:  <input id="Text1" type="text" name="SearchString" formmethod="get" />
+            <input id="Button1" type="submit" value="Filter" />
+        </p>
+    </form>
+    <br />
+    <br />
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
@@ -52,7 +60,8 @@
         }
 
     </table>
-} else
+}
+else
 {
     <h3>Please Login.</h3>
 }

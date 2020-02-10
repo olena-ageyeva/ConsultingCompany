@@ -17,12 +17,18 @@ namespace DataEntryClient.Controllers
             this.db = db;
         }
         // GET: Resources
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             ViewBag.LoggedIn = db.LoggedIn();
             var model = db.GetOrderedResources();
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                model = db.GetOrderedResources().Where(r => r.Type.ToString().ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
+            }
             return View(model);
         }
+
+     
 
         public ActionResult Details(int id)
         {
