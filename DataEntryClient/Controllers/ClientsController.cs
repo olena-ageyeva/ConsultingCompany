@@ -22,13 +22,31 @@ namespace DataEntryClient.Controllers
 
 
         [HttpGet]
-        public ActionResult Index()
+       // public ActionResult Index()
+       // {
+       //     ViewBag.Message = "Our Clients";
+       //     ViewBag.LoggedIn = db.LoggedIn();
+       //     dynamic mymodel = new ExpandoObject();
+       //     mymodel.Clients = db.GetOrderedClients();
+       //     mymodel.Resources = db.GetOrderedResources();
+        //    return View(mymodel);
+        //}
+
+        
+        public ActionResult Index(string searchString)
         {
+          
             ViewBag.Message = "Our Clients";
             ViewBag.LoggedIn = db.LoggedIn();
             dynamic mymodel = new ExpandoObject();
             mymodel.Clients = db.GetOrderedClients();
             mymodel.Resources = db.GetOrderedResources();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                mymodel.Clients = db.GetOrderedClients().Where(c => c.CompanyName.Contains(searchString));
+            }
+
             return View(mymodel);
         }
 
