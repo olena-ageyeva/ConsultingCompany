@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ConsultingCompany.Lib.Client>
+
+
+@{
+    ViewBag.Title = "Client";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <h1>This is a client page</h1>
+    </div>
+
+    <div>
+        There are @Model.Count() clients in the db
+    </div>
+    </div>
+
+    <ul>
+        @foreach (var client in Model)
+        {
+            <li>
+                @client.ContactLastName @client.ContactFirstName
+            </li>
+        }
+    </ul>
+</body>
+</html>

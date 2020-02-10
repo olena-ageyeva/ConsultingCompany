@@ -1,0 +1,87 @@
+﻿@using ConsultingCompany.Lib;
+@model dynamic
+
+@{
+    ViewBag.Title = "Clients";
+}
+
+<h2>@ViewBag.Message</h2>
+
+@if (ViewBag.LoggedIn == true)
+{
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Company Name
+        </th>
+        <th>
+            ContactFirstName
+        </th>
+        <th>
+            ContactLastName
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Zip
+        </th>
+        <th>
+            Resources
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (Client client in Model.Clients)
+    {
+<tr>
+    <td>
+        @client.CompanyName
+    </td>
+    <td>
+        @client.ContactFirstName
+    </td>
+    <td>
+        @client.ContactLastName
+    </td>
+    <td>
+        @client.City
+    </td>
+    <td>
+        @client.State
+    </td>
+    <td>
+        @client.Zip
+    </td>
+    <td>        
+
+        @if (client.Resources != null)
+        {
+            @Html.DropDownList("Nums", new SelectList(client.Resources, "Id", "FirstName", "LastName"))
+        }
+
+
+
+
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = client.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = client.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = client.Id })
+    </td>
+</tr>
+    }
+
+</table>
+}
+else
+{
+    <h3>Please Login.</h3>
+}
+
